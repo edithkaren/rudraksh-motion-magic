@@ -10,6 +10,7 @@ export default defineTool({
   inputSchema: {
     year: z.string().optional().describe("Optional year filter, e.g. \"2026\"."),
   },
+  outputSchema: { projects: z.array(z.record(z.string(), z.unknown())) },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ year }) => {
     const rows = year ? projects.filter((p) => p.year === year) : projects;

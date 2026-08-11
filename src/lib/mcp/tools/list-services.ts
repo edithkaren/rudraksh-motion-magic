@@ -1,4 +1,5 @@
 import { defineTool } from "@lovable.dev/mcp-js";
+import { z } from "zod";
 import { services, socialChannels } from "../portfolio-data";
 
 export default defineTool({
@@ -7,6 +8,10 @@ export default defineTool({
   description:
     "List the services Rudraksh Paliwal offers along with his social channels (Instagram, YouTube, Pinterest, Figma, Framer).",
   inputSchema: {},
+  outputSchema: {
+    services: z.array(z.record(z.string(), z.unknown())),
+    channels: z.array(z.record(z.string(), z.unknown())),
+  },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: () => ({
     content: [
